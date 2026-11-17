@@ -10,10 +10,16 @@ export const SITE_NAME = "意味怖アーカイブ";
 export const OPERATOR_NAME = "（運営者名）";
 
 /** 連絡先メールアドレス（お問い合わせフォームの送信先にもなります） */
-export const CONTACT_EMAIL = "your-address@example.com";
+export const CONTACT_EMAIL = "solbed97@gmail.com";
 
 /** 各ポリシーの制定日 */
 export const POLICY_ESTABLISHED = "2026年11月17日";
 
 /** 上の値がまだ記載例のままかどうか（ページ上に注意書きを出すのに使う） */
 export const IS_PLACEHOLDER_CONTACT = CONTACT_EMAIL.endsWith("@example.com");
+
+/**
+ * フッターのアクセスカウンター（無料サービス hits.sh の SVG バッジ）。
+ * キーを変えるとカウントは 0 からやり直しになります。空文字にすると非表示。
+ */
+export const COUNTER_KEY = "my-web-app-ym29.vercel.app/imikowa";

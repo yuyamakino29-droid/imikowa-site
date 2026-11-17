@@ -3,6 +3,8 @@ import { Shippori_Mincho } from "next/font/google";
 import Link from "next/link";
 import Script from "next/script";
 import { ADSENSE_CLIENT_ID } from "@/lib/ads";
+import { CLARITY_PROJECT_ID, clarityScript } from "@/lib/analytics";
+import { COUNTER_KEY } from "@/data/site";
 import { STORAGE_KEYS } from "@/lib/prefs";
 import "./globals.css";
 
@@ -38,6 +40,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="ja" data-font-size="md" className={`${shippori.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: fontSizeScript }} />
+        {/* Microsoft Clarity（アクセス解析）。プロジェクトIDが設定されているときだけ、全ページの <head> で読み込む */}
+        {CLARITY_PROJECT_ID && (
+          <script id="ms-clarity" type="text/javascript" dangerouslySetInnerHTML={{ __html: clarityScript(CLARITY_PROJECT_ID) }} />
+        )}
       </head>
       {/* パブリッシャーIDが設定されているときだけ AdSense を読み込む */}
       {ADSENSE_CLIENT_ID && (
@@ -73,7 +79,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               ))}
             </ul>
           </nav>
-          <p className="mt-8">© 2026 意味怖アーカイブ</p>
+          {COUNTER_KEY && (
+            <p className="mt-8 flex justify-center">
+              {/* 外部の SVG カウンター。ページ（フルロード）ごとに 1 カウントされる */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`https://hits.sh/${COUNTER_KEY}.svg?view=total&style=flat-square&label=VISITORS&color=991b1b&labelColor=121216`}
+                alt="訪問者数"
+                height={20}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                className="h-5 w-auto opacity-80"
+              />
+            </p>
+          )}
+          <p className="mt-6">© 2026 意味怖アーカイブ</p>
           <p className="mt-2 text-[11px] tracking-normal">しおり・ゾッとした・文字サイズは、このブラウザ内にのみ保存されます。</p>
         </footer>
       </body>

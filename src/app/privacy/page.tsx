@@ -55,6 +55,20 @@ export default function PrivacyPage() {
           </a>
           をご覧ください。
         </p>
+        <p>
+          また当サイトでは、サイトの使いやすさの改善を目的として、Microsoft Corporation が提供するアクセス解析ツール「Microsoft Clarity」を利用しています。Clarity は Cookie 等を使用して、ページ内でのクリックやスクロールなどの操作状況（ヒートマップやセッションの再生を含む）を記録します。収集されるデータは匿名で、個人を特定するものではありません。データの取り扱いについては
+          <a href="https://privacy.microsoft.com/ja-jp/privacystatement" target="_blank" rel="noopener noreferrer">
+            Microsoft プライバシーに関する声明
+          </a>
+          をご覧ください。
+        </p>
+        <p>
+          ページ下部の訪問者数カウンターには、外部の無料サービス「
+          <a href="https://hits.sh/" target="_blank" rel="noopener noreferrer">
+            hits.sh
+          </a>
+          」を利用しています。カウンター画像の表示時に、ご利用のブラウザから同サービスへアクセスが発生しますが、当サイトが個人を特定する情報を同サービスへ送ることはありません。
+        </p>
       </Section>
 
       <Section title="ブラウザ内に保存する情報について">
