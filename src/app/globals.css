@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #0a0a0c;
+  --color-charcoal: #121216;
+  --color-charcoal-2: #1a1a20;
+  --color-line: #2a2a31;
+  --color-paper: #e5e5e5;
+  --color-dim: #a3a3a8;
+  --color-faint: #6e6e76;
+  --color-blood: #991b1b;
+  --color-blood-bright: #dc2626;
+  --color-clot: #2a0b0b;
+
+  --font-mincho: var(--font-shippori), "Hiragino Mincho ProN", "Yu Mincho", serif;
+}
+
+/* 文字サイズ切り替え（html[data-font-size] を head のインラインスクリプトと切り替えボタンが設定する） */
+:root {
+  --story-size: 1.0625rem;
+  --card-size: 0.9375rem;
+  color-scheme: dark;
+}
+:root[data-font-size="sm"] {
+  --story-size: 0.9375rem;
+  --card-size: 0.8125rem;
+}
+:root[data-font-size="lg"] {
+  --story-size: 1.25rem;
+  --card-size: 1.0625rem;
+}
+
+body {
+  background: var(--color-void);
+  color: var(--color-paper);
+  font-family: var(--font-mincho);
+  font-feature-settings: "palt";
+}
+
+/* 背景にうっすら漂う赤黒い滲み */
+.bg-haze {
+  background:
+    radial-gradient(60rem 30rem at 50% -10%, rgb(153 27 27 / 0.14), transparent 70%),
+    radial-gradient(40rem 30rem at 100% 100%, rgb(153 27 27 / 0.06), transparent 70%),
+    var(--color-void);
+}
+
+::selection {
+  background: rgb(153 27 27 / 0.6);
+  color: #fff;
+}
+
+/* 伏線ハイライト：解説を開くと赤黒く浮かび上がる */
+.foreshadow {
+  border-radius: 1px;
+  background-color: transparent;
+  color: inherit;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background-image: linear-gradient(transparent, transparent);
+  transition:
+    background-color 900ms ease,
+    color 900ms ease,
+    box-shadow 900ms ease;
+}
+.foreshadow[data-revealed="true"] {
+  background-color: rgb(127 17 17 / 0.55);
+  color: #fecaca;
+  box-shadow:
+    0 0 0 2px rgb(127 17 17 / 0.55),
+    0 0 18px rgb(220 38 38 / 0.25);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .foreshadow,
+  .reveal-panel {
+    transition: none !important;
+  }
+}
