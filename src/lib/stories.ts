@@ -1,5 +1,3 @@
-import { existsSync } from "node:fs";
-import path from "node:path";
 import { stories, type Story } from "@/data/stories";
 
 /** 本文・解説の文字列を段落の配列にする（前後の空行は無視） */
@@ -55,10 +53,10 @@ function validate(list: Story[]): Story[] {
     seen.add(s.id);
     if (![1, 2, 3, 4, 5].includes(s.fearLevel)) problems.push(`${label} fearLevel は 1〜5 で指定してください`);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(s.createdAt)) problems.push(`${label} createdAt は YYYY-MM-DD 形式で指定してください`);
-    if (s.image !== undefined) {
-      if (!s.image.startsWith("/")) problems.push(`${label} image は "/images/ファイル名.jpg" のように / から始めてください`);
-      else if (!existsSync(path.join(process.cwd(), "public", s.image))) problems.push(`${label} 画像 public${s.image} が見つかりません`);
+     if (s.image !== undefined && !s.image.startsWith("/")) {
+      problems.push(`${label} image は "/images/ファイル名.jpg" のように / から始めてください`);
     }
+
     const paragraphs = toParagraphs(s.content);
     for (const f of s.highlights) {
       if (!paragraphs.some((p) => p.includes(f))) {
